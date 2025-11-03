@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartify - Your Online Store</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo" id="homeBtn">
+      <i class="fas fa-shopping-bag"></i>
+      <span>Cartify</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a id="homeLink"><i class="fas fa-home"></i> Home</a></li>
+      <li><a id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count">(0)</span></a></li>
+      <li><a id="dealsLink"><i class="fas fa-bolt"></i> Deals</a></li>
+      <li><a id="accountLink"><i class="fas fa-user"></i> Account</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <div class="success-message" id="successMessage">
+    <i class="fas fa-check-circle"></i>
+    <span id="successText">Order placed successfully!</span>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Menu</div>
+      <button class="close-sidebar" id="closeSidebar">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a id="sidebarHome"><i class="fas fa-home"></i> Home</a></li>
+      <li><a id="sidebarCart"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count">(0)</span></a></li>
+      <li><a id="sidebarDeals"><i class="fas fa-bolt"></i> Deals</a></li>
+      <li><a id="sidebarAccount"><i class="fas fa-user"></i> Account</a></li>
+      <li><a href="login.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <div class="modal" id="cartModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Your Shopping Cart</h3>
+        <button class="close-modal" id="closeCartModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="cart-items" id="cartItems">
+      </div>
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">₹0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <div class="modal" id="accountModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Account Details</h3>
+        <button class="close-modal" id="closeAccountModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="user-details" id="userDetails">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="dealsModal">
+    <div class="modal-content deals-modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Today's Best Deals</h3>
+        <button class="close-modal" id="closeDealsModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="deals-category">
+        <h4 class="deals-category-title">Electronics</h4>
+        <div class="deals-grid">
+          <div class="deal-card">
+            <div class="deal-image">
+              <i class="fas fa-headphones"></i>
+            </div>
+            <div class="deal-info">
+              <h4 class="deal-title">Wireless Headphones</h4>
+              <div class="deal-price">₹1,299</div>
+              <div class="deal-original-price">₹2,499</div>
+              <span class="deal-discount">48% OFF</span>
+              <button class="add-to-cart" data-id="11" data-name="Wireless Headphones" data-price="1299" data-icon="fas fa-headphones">Add to Cart</button>
+            </div>
+          </div>
+          
+          <div class="deal-card">
+            <div class="deal-image">
+              <i class="fas fa-tablet-alt"></i>
+            </div>
+            <div class="deal-info">
+              <h4 class="deal-title">Tablet</h4>
+              <div class="deal-price">₹12,999</div>
+              <div class="deal-original-price">₹18,999</div>
+              <span class="deal-discount">32% OFF</span>
+              <button class="add-to-cart" data-id="12" data-name="Tablet" data-price="12999" data-icon="fas fa-tablet-alt">Add to Cart</button>
+            </div>
+          </div>
+          
+          <div class="deal-card">
+            <div class="deal-image">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="deal-info">
+              <h4 class="deal-title">Smartphone</h4>
+              <div class="deal-price">₹15,999</div>
+              <div class="deal-original-price">₹24,999</div>
+              <span class="deal-discount">36% OFF</span>
+              <button class="add-to-cart" data-id="13" data-name="Smartphone" data-price="15999" data-icon="fas fa-mobile-alt">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="deals-category">
+        <h4 class="deals-category-title">Fashion</h4>
+        <div class="deals-grid">
+          <div class="deal-card">
+            <div class="deal-image">
+              <i class="fas fa-tshirt"></i>
+            </div>
+            <div class="deal-info">
+              <h4 class="deal-title">Casual T-Shirt</h4>
+              <div class="deal-price">₹399</div>
+              <div class="deal-original-price">₹799</div>
+              <span class="deal-discount">50% OFF</span>
+              <button class="add-to-cart" data-id="14" data-name="Casual T-Shirt" data-price="399" data-icon="fas fa-tshirt">Add to Cart</button>
+            </div>
+          </div>
+          
+          <div class="deal-card">
+            <div class="deal-image">
+              <i class="fas fa-shoe-prints"></i>
+            </div>
+            <div class="deal-info">
+              <h4 class="deal-title">Sports Shoes</h4>
+              <div class="deal-price">₹1,499</div>
+              <div class="deal-original-price">₹2,999</div>
+              <span class="deal-discount">50% OFF</span>
+              <button class="add-to-cart" data-id="15" data-name="Sports Shoes" data-price="1499" data-icon="fas fa-shoe-prints">Add to Cart</button>
+            </div>
+          </div>
+          
+          <div class="deal-card">
+            <div class="deal-image">
+              <i class="fas fa-vest"></i>
+            </div>
+            <div class="deal-info">
+              <h4 class="deal-title">Winter Jacket</h4>
+              <div class="deal-price">₹1,799</div>
+              <div class="deal-original-price">₹3,599</div>
+              <span class="deal-discount">50% OFF</span>
+              <button class="add-to-cart" data-id="16" data-name="Winter Jacket" data-price="1799" data-icon="fas fa-vest">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="welcome-section">
+      <h1 id="welcomeMessage">Welcome to Cartify!</h1>
+      <p>Discover amazing products at great prices. Happy shopping!</p>
+    </div>
+
+    <div class="deals-section">
+      <div class="deals-header">
+        <h2 class="deals-title">Deals of the Day</h2>
+        <div class="countdown" id="countdown">Offer ends in: 05:00</div>
+      </div>
+      <div class="deals-grid">
+        <div class="deal-card">
+          <div class="deal-image">
+            <i class="fas fa-laptop"></i>
+          </div>
+          <div class="deal-info">
+            <h4 class="deal-title">Gaming Laptop</h4>
+            <div class="deal-price">₹64,999</div>
+            <div class="deal-original-price">₹89,999</div>
+            <span class="deal-discount">28% OFF</span>
+            <button class="add-to-cart" data-id="17" data-name="Gaming Laptop" data-price="64999" data-icon="fas fa-laptop">Add to Cart</button>
+          </div>
+        </div>
+        
+        <div class="deal-card">
+          <div class="deal-image">
+            <i class="fas fa-tv"></i>
+          </div>
+          <div class="deal-info">
+            <h4 class="deal-title">Smart TV</h4>
+            <div class="deal-price">₹24,999</div>
+            <div class="deal-original-price">₹34,999</div>
+            <span class="deal-discount">29% OFF</span>
+            <button class="add-to-cart" data-id="18" data-name="Smart TV" data-price="24999" data-icon="fas fa-tv">Add to Cart</button>
+          </div>
+        </div>
+        
+        <div class="deal-card">
+          <div class="deal-image">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <div class="deal-info">
+            <h4 class="deal-title">Kitchen Set</h4>
+            <div class="deal-price">₹2,499</div>
+            <div class="deal-original-price">₹4,999</div>
+            <span class="deal-discount">50% OFF</span>
+            <button class="add-to-cart" data-id="19" data-name="Kitchen Set" data-price="2499" data-icon="fas fa-utensils">Add to Cart</button>
+          </div>
+        </div>
+        
+        <div class="deal-card">
+          <div class="deal-image">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <div class="deal-info">
+            <h4 class="deal-title">Fitness Equipment</h4>
+            <div class="deal-price">₹3,999</div>
+            <div class="deal-original-price">₹6,999</div>
+            <span class="deal-discount">43% OFF</span>
+            <button class="add-to-cart" data-id="20" data-name="Fitness Equipment" data-price="3999" data-icon="fas fa-dumbbell">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Featured Products</h2>
+
+    <div class="carousel-container">
+      <button class="carousel-btn prev" id="prevBtn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-btn next" id="nextBtn">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      
+      <div class="carousel" id="carousel">
+        <div class="product-card">
+          <div class="product-image">
+            <i class="fas fa-laptop"></i>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Premium Laptop</h3>
+            <div class="product-price">₹74,999</div>
+            <p class="product-description">High-performance laptop with latest processor and stunning display.</p>
+            <button class="add-to-cart" data-id="1" data-name="Premium Laptop" data-price="74999" data-icon="fas fa-laptop">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Smartphone</h3>
+            <div class="product-price">₹24,999</div>
+            <p class="product-description">Latest smartphone with advanced camera and long battery life.</p>
+            <button class="add-to-cart" data-id="2" data-name="Smartphone" data-price="24999" data-icon="fas fa-mobile-alt">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <i class="fas fa-headphones"></i>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Wireless Headphones</h3>
+            <div class="product-price">₹2,499</div>
+            <p class="product-description">Noise-cancelling headphones with premium sound quality.</p>
+            <button class="add-to-cart" data-id="3" data-name="Wireless Headphones" data-price="2499" data-icon="fas fa-headphones">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <i class="fas fa-tshirt"></i>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Casual T-Shirt</h3>
+            <div class="product-price">₹599</div>
+            <p class="product-description">Comfortable and stylish t-shirt made from premium cotton.</p>
+            <button class="add-to-cart" data-id="4" data-name="Casual T-Shirt" data-price="599" data-icon="fas fa-tshirt">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Bestseller Book</h3>
+            <div class="product-price">₹349</div>
+            <p class="product-description">The latest bestselling novel from a popular author.</p>
+            <button class="add-to-cart" data-id="5" data-name="Bestseller Book" data-price="349" data-icon="fas fa-book">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <i class="fas fa-watch"></i>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Smart Watch</h3>
+            <div class="product-price">₹4,999</div>
+            <p class="product-description">Track your fitness and stay connected with this smartwatch.</p>
+            <button class="add-to-cart" data-id="6" data-name="Smart Watch" data-price="4999" data-icon="fas fa-watch">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="carousel-indicators" id="indicators">
+      </div>
+    </div>
+
+    <h2 class="section-title">Special Offers</h2>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-image">
+          <i class="fas fa-tablet-alt"></i>
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Tablet</h3>
+          <div class="product-price">
+            <span class="original-price">₹18,999</span>
+            ₹14,999
+            <span class="discount">21% OFF</span>
+          </div>
+          <p class="product-description">Perfect for work and entertainment on the go.</p>
+          <button class="add-to-cart" data-id="7" data-name="Tablet" data-price="14999" data-icon="fas fa-tablet-alt">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <i class="fas fa-camera"></i>
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Digital Camera</h3>
+          <div class="product-price">
+            <span class="original-price">₹34,999</span>
+            ₹28,999
+            <span class="discount">17% OFF</span>
+          </div>
+          <p class="product-description">Capture your precious moments with high-quality photos.</p>
+          <button class="add-to-cart" data-id="8" data-name="Digital Camera" data-price="28999" data-icon="fas fa-camera">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <i class="fas fa-gamepad"></i>
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Gaming Console</h3>
+          <div class="product-price">
+            <span class="original-price">₹44,999</span>
+            ₹39,999
+            <span class="discount">11% OFF</span>
+          </div>
+          <p class="product-description">Next-gen gaming console with immersive experience.</p>
+          <button class="add-to-cart" data-id="9" data-name="Gaming Console" data-price="39999" data-icon="fas fa-gamepad">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <i class="fas fa-shoe-prints"></i>
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Sports Shoes</h3>
+          <div class="product-price">
+            <span class="original-price">₹3,999</span>
+            ₹2,499
+            <span class="discount">38% OFF</span>
+          </div>
+          <p class="product-description">Comfortable sports shoes for your active lifestyle.</p>
+          <button class="add-to-cart" data-id="10" data-name="Sports Shoes" data-price="2499" data-icon="fas fa-shoe-prints">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Cartify. All rights reserved.</p>
+      <p>Your trusted online shopping destination</p>
+    </div>
+  </footer>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
